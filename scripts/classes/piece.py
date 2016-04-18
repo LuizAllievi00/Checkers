@@ -11,3 +11,7 @@ class Piece(object):
         print(track)
     def __str__(self):
         return "Piece : %s " % self.player
+<<<<<<< Updated upstream
+=======
+x = 0githu
+>>>>>>> Stashed changes
