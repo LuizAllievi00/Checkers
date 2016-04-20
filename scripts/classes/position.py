@@ -4,6 +4,9 @@ class Position(object):
         self.occupation = []
         self.localization = (localization[0], localization[1])
         self.color = color
+        self.rect = []
+        self.piece_circle = []
+        self.clicked = False
 
     def get_near(self, tab):
         self.set_near(tab)

@@ -29,3 +29,5 @@ class Board(object):
             string += "\n"
         return string
 
+    def __len__(self):
+        return len(self.board)
