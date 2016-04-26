@@ -1,8 +1,8 @@
 class Track(object):
 
     def __init__(self, start, destiny):
-        self.start = (start.localization[0], start.localization[1])
-        self.destiny = (destiny.localization[0], destiny.localization[1])
+        self.start = start.localization
+        self.destiny = destiny.localization
         self.track_list = []
         self.set_track_list()
 
@@ -21,15 +21,18 @@ class Track(object):
             else:
                 x_step = -1
                 y_step = -1
-        for x in range(self.start[0], self.destiny[0] + 1, x_step):
-            for y in range(self.start[1], self.destiny[1] + 1, y_step):
-                self.track_list.append(x,y)
+        for x, y in zip(range(self.start[0] + x_step, self.destiny[0] + x_step, x_step), range(self.start[1] + y_step, self.destiny[1] + y_step, y_step)):
+            print(x,y)
+            self.track_list.append([x,y])
+            print(self.track_list)
+
 
     def get_track(self):
-        return track.track_list
+        return self.track_list
 
     def __str__(self):
         string = 'Track \n'
         for item in self.track_list:
             string += item + " "
         return string
+

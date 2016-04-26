@@ -1,14 +1,14 @@
 from position import *
+
 class Board(object):
 
     def __init__(self):
         super(Board, self).__init__()
         self.board = [[0 for i in range(8)] for i in range(8)]
-        self.create_positions()
+        self.__create_positions__()
 
 
-    def create_positions(self):
-
+    def __create_positions__(self):
 
         for item in range(0, 8):
             for i in range(0, 8):

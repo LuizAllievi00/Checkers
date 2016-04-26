@@ -20,6 +20,7 @@ class MainInterface(object):
         self.event()
 
     def get_rects(self):
+        self.rects = []
         for line in range(len(tab)):
             for column in range(len(tab[0])):
                 tab[line][column].rect = pygame.Rect((column * self.rect_width, line * self.rect_width), (self.rect_width, self.rect_width))
@@ -31,6 +32,7 @@ class MainInterface(object):
                     tab[line][column].piece_circle = (self.screen, piece_color, ((self.rect_width * column) + self.circle_width, (self.rect_width * line) + self.circle_width), 30)
 
     def show_rects(self):
+        self.get_rects()
         for rect in self.rects:
             color = (0, 0, 0)
             if rect[1].color == "white":
@@ -42,6 +44,15 @@ class MainInterface(object):
                 a = rect[1].piece_circle
                 pygame.draw.circle(a[0], a[1], a[2], a[3])
 
+    def move_piece(self):
+        self.clicked.occupation.move(self.destiny, self.tab)
+        self.clicked = []
+        self.destiny = []
+
+
+
+
+
 
     def event (self):
         self.done = False
@@ -50,12 +61,15 @@ class MainInterface(object):
                 if event.type == pygame.QUIT:
                         self.done = True
                 if event.type == MOUSEBUTTONDOWN:
-                    try: self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].clicked = False
+                    try:
+                        self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].clicked = False
+                        self.clicked = self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)]
                     except: pass
                     pos = pygame.mouse.get_pos()
-                    print (pos)
-                    self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].clicked = True
-                    self.clicked_pos = self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)]
+                    if self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].color != "white":
+                        self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].clicked = True
+                        self.clicked_pos = self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)]
+                        self.destiny = self.clicked_pos
                 if event.type == KEYDOWN:
                     if event.key == "K_ESCAPE":
                         pygame.QUIT
@@ -63,7 +77,8 @@ class MainInterface(object):
             
             self.screen.fill((255,0,0))
             self.show_rects()
-            try: print(self.clicked_pos)
+
+            try:self.move_piece()
             except: pass
 
             pygame.display.flip()

@@ -2,7 +2,7 @@ class Position(object):
 
     def __init__(self, localization, color):
         self.occupation = []
-        self.localization = (localization[0], localization[1])
+        self.localization = localization
         self.color = color
         self.rect = []
         self.piece_circle = []
