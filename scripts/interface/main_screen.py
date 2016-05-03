@@ -48,6 +48,9 @@ class MainInterface(object):
         self.clicked.occupation.move(self.destiny, self.tab)
         self.clicked = []
         self.destiny = []
+        self.pos = []
+        self.tab.reset_clicked()
+        return True
 
 
 
@@ -62,18 +65,21 @@ class MainInterface(object):
                         self.done = True
                 if event.type == MOUSEBUTTONDOWN:
                     try:
-                        self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].clicked = False
-                        self.clicked = self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)]
-                    except: pass
-                    pos = pygame.mouse.get_pos()
-                    if self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].color != "white":
-                        self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)].clicked = True
-                        self.clicked_pos = self.tab[int(pos[1] / self.rect_width)][int(pos[0] / self.rect_width)]
+                        self.tab[int(self.pos[1] / self.rect_width)][int(self.pos[0] / self.rect_width)].clicked = False
+                        self.clicked = self.tab[int(self.pos[1] / self.rect_width)][int(self.pos[0] / self.rect_width)]
+                    except:
+                        pass
+                    self.pos = pygame.mouse.get_pos()
+                    if self.tab[int(self.pos[1] / self.rect_width)][
+                        int(self.pos[0] / self.rect_width)].color != "white":
+                        self.tab[int(self.pos[1] / self.rect_width)][int(self.pos[0] / self.rect_width)].clicked = True
+                        self.clicked_pos = self.tab[int(self.pos[1] / self.rect_width)][
+                            int(self.pos[0] / self.rect_width)]
                         self.destiny = self.clicked_pos
-                if event.type == KEYDOWN:
-                    if event.key == "K_ESCAPE":
-                        pygame.QUIT
-                        self.done = True
+                    if event.type == KEYDOWN:
+                        if event.key == "K_ESCAPE":
+                            pygame.QUIT
+                            self.done = True
             
             self.screen.fill((255,0,0))
             self.show_rects()

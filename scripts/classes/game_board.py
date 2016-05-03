@@ -31,3 +31,8 @@ class Board(object):
 
     def __len__(self):
         return len(self.board)
+
+    def reset_clicked(self):
+        for line in self.board:
+            for elem in line:
+                elem.clicked = False
