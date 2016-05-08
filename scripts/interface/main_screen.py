@@ -33,6 +33,7 @@ class MainInterface(object):
 
     def show_rects(self):
         self.get_rects()
+        self.screen.fill((255, 0, 0))
         for rect in self.rects:
             color = (0, 0, 0)
             if rect[1].color == "white":
@@ -73,9 +74,9 @@ class MainInterface(object):
                     if self.tab[int(self.pos[1] / self.rect_width)][
                         int(self.pos[0] / self.rect_width)].color != "white":
                         self.tab[int(self.pos[1] / self.rect_width)][int(self.pos[0] / self.rect_width)].clicked = True
-                        self.clicked_pos = self.tab[int(self.pos[1] / self.rect_width)][
-                            int(self.pos[0] / self.rect_width)]
+                        self.clicked_pos = self.tab[int(self.pos[1] / self.rect_width)][int(self.pos[0] / self.rect_width)]
                         self.destiny = self.clicked_pos
+
                     if event.type == KEYDOWN:
                         if event.key == "K_ESCAPE":
                             pygame.QUIT
@@ -85,9 +86,11 @@ class MainInterface(object):
             self.show_rects()
 
             try:self.move_piece()
-            except: pass
+            except:pass
+            self.show_rects()
 
             pygame.display.flip()
+
             
 
 tab = game_board.Board()

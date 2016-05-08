@@ -22,9 +22,7 @@ class Track(object):
                 x_step = -1
                 y_step = -1
         for x, y in zip(range(self.start[0] + x_step, self.destiny[0] + x_step, x_step), range(self.start[1] + y_step, self.destiny[1] + y_step, y_step)):
-            print(x,y)
             self.track_list.append([x,y])
-            print(self.track_list)
 
 
     def get_track(self):
